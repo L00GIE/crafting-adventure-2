@@ -6,6 +6,7 @@ class Player:
 
     def __init__(self, core):
         self.core = core
+        self.cowsuit = True
         self.x = 0
         self.y = 0
         self.w = 64
@@ -15,15 +16,20 @@ class Player:
         self.maxspeed = 6
         self.direction = "e"
         self.initSprites()
+        self.initCowSuitSprites()
         self.currentAnim = self.idleRightAnim
+        self.cowAnim = self.cowIdleRightAnim
         self.collider = Collider(self)
 
     def loop(self):
-        self.checkMovement()
+        self.checkInput()
         self.collider.update()
         self.currentAnim.play()
+        if self.cowsuit:
+            self.updatecowsuit()
+            self.cowAnim.play()
 
-    def checkMovement(self):
+    def checkInput(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LSHIFT]:
             self.speed = self.maxspeed
@@ -44,6 +50,10 @@ class Player:
             elif self.direction == "n" or self.direction == "w":
                 self.currentAnim = self.idleLeftAnim
             self.moving = False
+        for event in self.core.events:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_f:
+                    self.cowsuit = not self.cowsuit
         
     def move(self, newdir, anim):
         self.direction = newdir
@@ -53,6 +63,20 @@ class Player:
         if newdir == "e": self.x += self.speed
         if newdir == "s": self.y += self.speed
         if newdir == "w": self.x -= self.speed
+
+    def updatecowsuit(self):
+        if self.direction == "n":
+            if self.moving: self.cowAnim = self.cowWalkLeftAnim
+            else: self.cowAnim = self.cowIdleLeftAnim
+        if self.direction == "s":
+            if self.moving: self.cowAnim = self.cowWalkRightAnim
+            else: self.cowAnim = self.cowIdleRightAnim
+        if self.direction == "w":
+            if self.moving: self.cowAnim = self.cowWalkLeftAnim
+            else: self.cowAnim = self.cowIdleLeftAnim
+        if self.direction == "e":
+            if self.moving: self.cowAnim = self.cowWalkRightAnim
+            else: self.cowAnim = self.cowIdleRightAnim
 
     def initSprites(self):
         ss = pygame.image.load("data/assets/characters/main character/walk and idle.png")
@@ -73,3 +97,23 @@ class Player:
         self.axeRightAnim = Animation([ss.subsurface(48, 24, 24, 24), ss.subsurface(72, 24, 24, 24)], self)
         self.hoeLeftAnim = Animation([ss.subsurface(0, 48, 24, 24), ss.subsurface(24, 48, 24, 24)], self)
         self.hoeRightAnim = Animation([ss.subsurface(48, 48, 24, 24), ss.subsurface(72, 48, 24, 24)], self)
+
+    def initCowSuitSprites(self):
+        ss = pygame.image.load("data/assets/characters/main character/cow kigurumi walk and idle.png")
+        self.cowIdleLeftAnim = Animation([ss.subsurface((0, 0, 24, 24)), ss.subsurface((24, 0, 24, 24))], self, delay= 10)
+        self.cowIdleRightAnim = Animation([ss.subsurface((48, 0, 24, 24)), ss.subsurface((72, 0, 24, 24))], self, delay= 10)
+        walkleftsprites = []
+        for x in range(8):
+            walkleftsprites.append(ss.subsurface(24 * x, 24, 24, 24))
+        self.cowWalkLeftAnim = Animation(walkleftsprites, self)
+        walkrightsprites = []
+        for x in range(8):
+            walkrightsprites.append(ss.subsurface(24 * x, 48, 24, 24))
+        self.cowWalkRightAnim = Animation(walkrightsprites, self)
+        ss = pygame.image.load("data/assets/characters/main character/cow kigurumi farming animations.png")
+        self.cowWaterLeftAnim = Animation([ss.subsurface(0, 0, 24, 24), ss.subsurface(24, 0, 24, 24)], self)
+        self.cowWaterRightAnim = Animation([ss.subsurface(48, 0, 24, 24), ss.subsurface(72, 0, 24, 24)], self)
+        self.cowAxeLeftAnim = Animation([ss.subsurface(0, 24, 24, 24), ss.subsurface(24, 24, 24, 24)], self)
+        self.cowAxeRightAnim = Animation([ss.subsurface(48, 24, 24, 24), ss.subsurface(72, 24, 24, 24)], self)
+        self.cowHoeLeftAnim = Animation([ss.subsurface(0, 48, 24, 24), ss.subsurface(24, 48, 24, 24)], self)
+        self.cowHoeRightAnim = Animation([ss.subsurface(48, 48, 24, 24), ss.subsurface(72, 48, 24, 24)], self)
