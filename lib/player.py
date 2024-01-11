@@ -7,13 +7,14 @@ class Player:
     def __init__(self, core):
         self.core = core
         self.cowsuit = True
-        self.x = 0
-        self.y = 0
         self.w = 64
         self.h = 64
+        self.x = (pygame.display.get_surface().get_width() / 2) - (self.w / 2)
+        self.y = (pygame.display.get_surface().get_height() / 2) - (self.h / 2)
         self.speed = 3
         self.minspeed = 3
         self.maxspeed = 6
+        self.stopped = False
         self.direction = "e"
         self.initSprites()
         self.initCowSuitSprites()
@@ -47,15 +48,31 @@ class Player:
             keys[pygame.K_a] and not keys[pygame.K_d]:
             if self.direction == "s" or self.direction == "e":
                 self.currentAnim = self.idleRightAnim
-            elif self.direction == "n" or self.direction == "w":
+            if self.direction == "n" or self.direction == "w":
                 self.currentAnim = self.idleLeftAnim
             self.moving = False
         for event in self.core.events:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_f:
                     self.cowsuit = not self.cowsuit
+    
+    def stop(self):
+        self.stopped = True
+
+    def stop(self, obj):
+        if self.x > obj.x:
+            self.x += self.speed
+        if self.x < obj.x:
+            self.x -= self.speed
+        if self.y > obj.y:
+            self.y += self.speed
+        if self.y < obj.y:
+            self.y -= self.speed
         
     def move(self, newdir, anim):
+        if self.stopped and newdir == self.direction:
+            return
+        self.stopped = False
         self.direction = newdir
         self.currentAnim = anim
         self.moving = True

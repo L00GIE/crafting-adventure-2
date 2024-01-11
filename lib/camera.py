@@ -23,6 +23,7 @@ class Camera:
     
     def shiftobjects(self, newplayerpos):
         for obj in self.core.scene.objects:
+            if obj == self.core.player: continue
             if newplayerpos[0] > self.lastplayerpos[0]:
                 obj.x -= self.core.player.speed
             elif newplayerpos[0] < self.lastplayerpos[0]:
@@ -31,3 +32,12 @@ class Camera:
                 obj.y -= self.core.player.speed
             elif newplayerpos[1] < self.lastplayerpos[1]:
                 obj.y += self.core.player.speed
+        for tile in self.core.scene.tilemanager.tiles:
+            if newplayerpos[0] > self.lastplayerpos[0]:
+                tile.x -= self.core.player.speed
+            elif newplayerpos[0] < self.lastplayerpos[0]:
+                tile.x += self.core.player.speed
+            if newplayerpos[1] > self.lastplayerpos[1]:
+                tile.y -= self.core.player.speed
+            elif newplayerpos[1] < self.lastplayerpos[1]:
+                tile.y += self.core.player.speed
