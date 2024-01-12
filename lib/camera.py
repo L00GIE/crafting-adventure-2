@@ -78,8 +78,10 @@ class Camera:
         for leaf in self.core.scene.leaves.leaves:
             if self.direction == "e":
                 leaf.x -= self.shiftspeed
+                leaf.startx -= self.shiftspeed
             if self.direction == "w":
                 leaf.x += self.shiftspeed
+                leaf.startx += self.shiftspeed
             if self.direction == "n":
                 leaf.y -= self.shiftspeed
             if self.direction == "s":

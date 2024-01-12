@@ -4,8 +4,13 @@ sys.dont_write_bytecode = True
 import pygame
 from lib.core import Core
 
+windowed = False
+
 pygame.init()
-screen = pygame.display.set_mode((1366, 768))
+if windowed:
+    screen = pygame.display.set_mode((1366, 768))
+else:
+    screen = pygame.display.set_mode((1366, 768), pygame.FULLSCREEN)
 core = Core()
 clock = pygame.time.Clock()
 

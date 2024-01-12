@@ -10,7 +10,8 @@ class Core:
     def __init__(self):
         self.cursor = Cursor(self)
         self.player = Player(self)
-        self.scene = Home(self)
+        self.initScenes()
+        self.scene = self.scenes[0]
         self.camera = Camera(self)
         self.ui = UI(self)
 
@@ -21,3 +22,11 @@ class Core:
         self.camera.loop()
         self.ui.loop()
         self.cursor.loop()
+
+    def changeScene(self, scene):
+        self.scene = scene
+
+    def initScenes(self):
+        self.scenes = [
+            Home(self)
+        ]

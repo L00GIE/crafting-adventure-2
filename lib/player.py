@@ -104,8 +104,8 @@ class Player:
 
     def initSprites(self):
         ss = pygame.image.load("data/assets/characters/main character/walk and idle.png")
-        self.idleLeftAnim = Animation([ss.subsurface((0, 0, 24, 24)), ss.subsurface((24, 0, 24, 24))], self, delay= 10)
-        self.idleRightAnim = Animation([ss.subsurface((48, 0, 24, 24)), ss.subsurface((72, 0, 24, 24))], self, delay= 10)
+        self.idleLeftAnim = Animation([ss.subsurface((0, 0, 24, 24)), ss.subsurface((24, 0, 24, 24))], self, delay=20)
+        self.idleRightAnim = Animation([ss.subsurface((48, 0, 24, 24)), ss.subsurface((72, 0, 24, 24))], self, delay=20)
         walkleftsprites = []
         for x in range(8):
             walkleftsprites.append(ss.subsurface(24 * x, 24, 24, 24))
@@ -124,8 +124,8 @@ class Player:
 
     def initCowSuitSprites(self):
         ss = pygame.image.load("data/assets/characters/main character/cow kigurumi walk and idle.png")
-        self.cowIdleLeftAnim = Animation([ss.subsurface((0, 0, 24, 24)), ss.subsurface((24, 0, 24, 24))], self, delay= 10)
-        self.cowIdleRightAnim = Animation([ss.subsurface((48, 0, 24, 24)), ss.subsurface((72, 0, 24, 24))], self, delay= 10)
+        self.cowIdleLeftAnim = Animation([ss.subsurface((0, 0, 24, 24)), ss.subsurface((24, 0, 24, 24))], self, delay=20)
+        self.cowIdleRightAnim = Animation([ss.subsurface((48, 0, 24, 24)), ss.subsurface((72, 0, 24, 24))], self, delay=20)
         walkleftsprites = []
         for x in range(8):
             walkleftsprites.append(ss.subsurface(24 * x, 24, 24, 24))
