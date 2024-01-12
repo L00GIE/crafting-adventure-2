@@ -55,9 +55,8 @@ class Toolbar:
                 pass
             if index == self.selecteditem:
                 try:
-                    type = self.items[self.selecteditem].text.split()[0].lower()
                     text = self.font.render(self.items[self.selecteditem].text, True, [0, 0, 0])
-                    counttext = self.font.render(f"Inventory: {self.core.player.inventory['seeds'][type]}", True, [0, 0, 0])
+                    counttext = self.font.render(f"Inventory: {self.core.player.inventory['seeds'][self.selecteditem].count}", True, [0, 0, 0])
                     screen.blit(text, (xpos, ypos - 20))
                     screen.blit(counttext, (xpos, ypos - 5))
                 except IndexError:
@@ -86,42 +85,77 @@ class Toolbar:
         ]
 
     def plantSelected(self):
-        if self.selecteditem >= len(self.items):
-            return
-        item = self.items[self.selecteditem]
-        type = item.text.split()[0].lower()
+        item = self.core.player.inventory["seeds"][self.selecteditem]
         for tile in self.core.scene.tilemanager.tiles:
             if tile.selected and tile.object is None:
-                if self.core.player.inventory["seeds"][type] > 0:
-                    tile.object = Plant(self.core, tile, type)
+                if item.count > 0:
+                    tile.object = Plant(self.core, tile, item)
                     tile.selected = False
-                    self.core.player.inventory["seeds"][type] -= 1
+                    item.count -= 1
 
     def initInventoryWindow(self):
         ss = pygame.image.load("data/assets/ui/gui.png")
+        size = 128
         self.inventoryWindowParts = []
-        self.inventoryWindowParts.append(ss.subsurface((0, 0, 16, 16)))
-        self.inventoryWindowParts.append(ss.subsurface((16, 0, 16, 16)))
-        self.inventoryWindowParts.append(ss.subsurface((32, 0, 16, 16)))
-        self.inventoryWindowParts.append(ss.subsurface((0, 16, 16, 16)))
-        self.inventoryWindowParts.append(ss.subsurface((16, 16, 16, 16)))
-        self.inventoryWindowParts.append(ss.subsurface((32, 16, 16, 16)))
-        self.inventoryWindowParts.append(ss.subsurface((0, 32, 16, 16)))
-        self.inventoryWindowParts.append(ss.subsurface((16, 32, 16, 16)))
-        self.inventoryWindowParts.append(ss.subsurface((32, 32, 16, 16)))
-        
+        self.inventoryWindowParts.append(pygame.transform.scale(ss.subsurface((0, 0, 16, 16)), (size, size))) # top-left corner
+        for x in range(4):
+            self.inventoryWindowParts.append(pygame.transform.scale(ss.subsurface((16, 0, 16, 16)), (size, size))) # top middle
+        self.inventoryWindowParts.append(pygame.transform.scale(ss.subsurface((32, 0, 16, 16)), (size, size))) # top-right corner
+        for x in range(3):
+            self.inventoryWindowParts.append(pygame.transform.scale(ss.subsurface((0, 16, 16, 16)), (size, size))) # left middle
+            for x in range(4):
+                self.inventoryWindowParts.append(pygame.transform.scale(ss.subsurface((16, 16, 16, 16)), (size, size))) # middle
+            self.inventoryWindowParts.append(pygame.transform.scale(ss.subsurface((32, 16, 16, 16)), (size, size))) # right middle
+        self.inventoryWindowParts.append(pygame.transform.scale(ss.subsurface((0, 32, 16, 16)), (size, size))) # bottom-left corner
+        for x in range(4):
+            self.inventoryWindowParts.append(pygame.transform.scale(ss.subsurface((16, 32, 16, 16)), (size, size))) # bottom middle
+        self.inventoryWindowParts.append(pygame.transform.scale(ss.subsurface((32, 32, 16, 16)), (size, size))) # bottom-right corner
 
     def showInventory(self):
         if self.inventoryOpen:
-            index = 0
-            y = 0
-            for part in self.inventoryWindowParts:
-                x = part.get_width() * index
-                pygame.display.get_surface().blit(part, (x, y))
-                index += 1
-                if index >= 3:
-                    index = 0
-                    y += 16
+            self.showInventoryBg()
+            self.showSeeds()
+            self.showCrops()
+
+    def showCrops(self):
+        x = 300
+        y = 100
+        titletext = self.font.render(f"Crops:", True, [0, 0, 0])
+        pygame.display.get_surface().blit(titletext, (x, y))
+        y += titletext.get_height() + 10
+        for crop in self.core.player.inventory["crops"]:
+            pygame.display.get_surface().blit(crop.image, (x, y))
+            x += crop.image.get_width() + 5
+            text = self.font.render(f"{crop.text}: {crop.count}", True, [0, 0, 0])
+            pygame.display.get_surface().blit(text, (x, y))
+            y += text.get_height() + 10
+            x = 300
+
+
+    def showSeeds(self):
+        x = 100
+        y = 100
+        titletext = self.font.render(f"Seeds:", True, [0, 0, 0])
+        pygame.display.get_surface().blit(titletext, (x, y))
+        y += titletext.get_height() + 10
+        for seed in self.core.player.inventory["seeds"]:
+            pygame.display.get_surface().blit(seed.image, (x, y))
+            x += seed.image.get_width() + 5
+            text = self.font.render(f"{seed.text}: {seed.count}", True, [0, 0, 0])
+            pygame.display.get_surface().blit(text, (x, y))
+            y += text.get_height() + 10
+            x = 100
+
+    def showInventoryBg(self):
+        index = 0
+        y = 0
+        for part in self.inventoryWindowParts:
+            x = part.get_width() * index
+            pygame.display.get_surface().blit(part, (x, y))
+            index += 1
+            if index >= 6:
+                index = 0
+                y += 128
 
 class ToolbarItem:
 

@@ -3,10 +3,10 @@ from lib.collider import Collider
 
 class Plant:
 
-    def __init__(self, core, tile, type):
+    def __init__(self, core, tile, item):
         self.core = core
         self.tile = tile
-        self.type = type
+        self.item = item
         self.x = tile.x
         self.y = tile.y
         self.miny = self.y
@@ -29,11 +29,16 @@ class Plant:
         if self.stage >= len(self.images) - 1:
             self.float()
             if self.core.player.collider.colliding(self):
-                self.core.player.inventory["crops"][self.type] += 1
-                self.core.player.inventory["seeds"][self.type] += random.randint(0, 2)
+                self.incrementCropCount()
+                self.item.count += random.randint(0, 2)
                 self.tile.object = None
         self.collider.update()
         pygame.display.get_surface().blit(self.images[self.stage], (self.x, self.y))
+
+    def incrementCropCount(self):
+        for crop in self.core.player.inventory["crops"]:
+            if crop.index == self.item.index:
+                crop.count += 1
 
     def float(self):
         if self.goingup:
@@ -48,30 +53,30 @@ class Plant:
     def initSprites(self):
         ss = pygame.image.load("data/assets/objects&items/plants.png")
         self.images = []
-        if self.type == "pumpkin":
+        if self.item.text == "Pumpkin Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 0, 16, 16)))
-        if self.type == "strawberry":
+        if self.item.text == "Strawberry Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 16, 16, 16)))
-        if self.type == "carrot":
+        if self.item.text == "Carrot Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 32, 16, 16)))
-        if self.type == "potato":
+        if self.item.text == "Potato Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 48, 16, 16)))
-        if self.type == "cabbage":
+        if self.item.text == "Cabbage Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 64, 16, 16)))
-        if self.type == "wheat":
+        if self.item.text == "Wheat Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 80, 16, 16)))
-        if self.type == "tomato":
+        if self.item.text == "Tomato Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 96, 16, 16)))
-        if self.type == "eggplant":
+        if self.item.text == "Eggplant Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 112, 16, 16)))
-        if self.type == "onion":
+        if self.item.text == "Onion Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 128, 16, 16)))

@@ -75,3 +75,12 @@ class Camera:
                     tile.object.y += self.shiftspeed
                     tile.object.miny += self.shiftspeed
                     tile.object.maxy += self.shiftspeed
+        for leaf in self.core.scene.leaves.leaves:
+            if self.direction == "e":
+                leaf.x -= self.shiftspeed
+            if self.direction == "w":
+                leaf.x += self.shiftspeed
+            if self.direction == "n":
+                leaf.y -= self.shiftspeed
+            if self.direction == "s":
+                leaf.y += self.shiftspeed

@@ -1,6 +1,7 @@
 import pygame
 from lib.animation import Animation
 from lib.collider import Collider
+from lib.item import Item
 
 class Player:
 
@@ -142,32 +143,27 @@ class Player:
         self.cowHoeRightAnim = Animation([ss.subsurface(48, 48, 24, 24), ss.subsurface(72, 48, 24, 24)], self)
 
     def initInventory(self):
+        ss = pygame.image.load("data/assets/objects&items/items.png")
         self.inventory = {
-            "seeds": {
-                "pumpkin": 5,
-                "strawberry": 5,
-                "carrot": 5,
-                "potato": 5,
-                "cabbage": 5,
-                "wheat": 5,
-                "tomato": 5,
-                "eggplant": 5,
-                "onion": 5
-            },
-            "crops": {
-                "pumpkin": 0,
-                "strawberry": 0,
-                "carrot": 0,
-                "potato": 0,
-                "cabbage": 0,
-                "wheat": 0,
-                "tomato": 0,
-                "eggplant": 0,
-                "onion": 0
-            },
-            "items": {
-                "wood": 0,
-                "milk": 5,
-                "wool": 10
-            }
+            "seeds": [],
+            "crops": []
         }
+        self.inventory["seeds"].append(Item(0, "Pumpkin Seeds", ss.subsurface((0, 16, 16, 16)), 5))
+        self.inventory["seeds"].append(Item(1, "Strawberry Seeds", ss.subsurface((80, 16, 16, 16)), 5))
+        self.inventory["seeds"].append(Item(2, "Carrot Seeds", ss.subsurface((32, 16, 16, 16)), 5))
+        self.inventory["seeds"].append(Item(3, "Potato Seeds", ss.subsurface((64, 16, 16, 16)), 5))
+        self.inventory["seeds"].append(Item(4, "Cabbage Seeds", ss.subsurface((16, 16, 16, 16)), 5))
+        self.inventory["seeds"].append(Item(5, "Wheat Seeds", ss.subsurface((48, 16, 16, 16)), 5))
+        self.inventory["seeds"].append(Item(6, "Tomato Seeds", ss.subsurface((96, 16, 16, 16)), 5))
+        self.inventory["seeds"].append(Item(7, "Eggplant Seeds", ss.subsurface((112, 16, 16, 16)), 5))
+        self.inventory["seeds"].append(Item(8, "Onion Seeds", ss.subsurface((128, 16, 16, 16)), 5))
+
+        self.inventory["crops"].append(Item(0, "Pumpkins", ss.subsurface((0, 0, 16, 16)), 0))
+        self.inventory["crops"].append(Item(1, "Strawberries", ss.subsurface((80, 0, 16, 16)), 0))
+        self.inventory["crops"].append(Item(2, "Carrots", ss.subsurface((32, 0, 16, 16)), 0))
+        self.inventory["crops"].append(Item(3, "Potatoes", ss.subsurface((64, 0, 16, 16)), 0))
+        self.inventory["crops"].append(Item(4, "Cabbages", ss.subsurface((16, 0, 16, 16)), 0))
+        self.inventory["crops"].append(Item(5, "Wheat", ss.subsurface((48, 0, 16, 16)), 0))
+        self.inventory["crops"].append(Item(6, "Tomatoes", ss.subsurface((96, 0, 16, 16)), 0))
+        self.inventory["crops"].append(Item(7, "Eggplants", ss.subsurface((112, 0, 16, 16)), 0))
+        self.inventory["crops"].append(Item(8, "Onions", ss.subsurface((128, 0, 16, 16)), 0))

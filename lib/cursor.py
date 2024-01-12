@@ -11,7 +11,7 @@ class Cursor:
         self.h = self.cursor.get_height()
         self.x = 0
         self.y = 0
-        self.collider = Collider(self, debug=False)
+        self.collider = Collider(self, point=True, debug=False)
 
     def loop(self):
         mousepos = pygame.mouse.get_pos()

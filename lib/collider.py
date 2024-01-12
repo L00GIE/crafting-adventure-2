@@ -2,9 +2,10 @@ import pygame
 
 class Collider:
 
-    def __init__(self, parent, debug=False):
+    def __init__(self, parent, point=False, debug=False):
         self.parent = parent
         self.rect = pygame.Rect((self.parent.x, self.parent.y, self.parent.w, self.parent.h))
+        self.point = point
         self.debug = debug
 
     def update(self):
@@ -18,6 +19,10 @@ class Collider:
 
     def colliding(self, obj):
         if hasattr(obj, "collider"):
-            if self.rect.colliderect(obj.collider.rect):
-                return True
+            if self.point:
+                if obj.collider.rect.collidepoint((self.rect.x, self.rect.y)):
+                    return True
+            else:
+                if self.rect.colliderect(obj.collider.rect):
+                    return True
         return False
