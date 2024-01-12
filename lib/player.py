@@ -21,6 +21,7 @@ class Player:
         self.currentAnim = self.idleRightAnim
         self.cowAnim = self.cowIdleRightAnim
         self.collider = Collider(self)
+        self.initInventory()
 
     def loop(self):
         self.checkInput()
@@ -139,3 +140,34 @@ class Player:
         self.cowAxeRightAnim = Animation([ss.subsurface(48, 24, 24, 24), ss.subsurface(72, 24, 24, 24)], self)
         self.cowHoeLeftAnim = Animation([ss.subsurface(0, 48, 24, 24), ss.subsurface(24, 48, 24, 24)], self)
         self.cowHoeRightAnim = Animation([ss.subsurface(48, 48, 24, 24), ss.subsurface(72, 48, 24, 24)], self)
+
+    def initInventory(self):
+        self.inventory = {
+            "seeds": {
+                "pumpkin": 5,
+                "strawberry": 5,
+                "carrot": 5,
+                "potato": 5,
+                "cabbage": 5,
+                "wheat": 5,
+                "tomato": 5,
+                "eggplant": 5,
+                "onion": 5
+            },
+            "crops": {
+                "pumpkin": 0,
+                "strawberry": 0,
+                "carrot": 0,
+                "potato": 0,
+                "cabbage": 0,
+                "wheat": 0,
+                "tomato": 0,
+                "eggplant": 0,
+                "onion": 0
+            },
+            "items": {
+                "wood": 0,
+                "milk": 5,
+                "wool": 10
+            }
+        }

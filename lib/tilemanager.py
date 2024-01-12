@@ -20,6 +20,8 @@ class TileManager:
         data = json.loads(content)
         for tileindex in data["tiles"]:
             tile = Tile(self, tileindex)
+            if tileindex == 98:
+                tile.isdirt = True
             tile.x = tile.image.get_width() * x
             tile.y = tile.image.get_height() * y
             self.tiles.append(tile)

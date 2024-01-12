@@ -20,8 +20,19 @@ class Animal:
     def loop(self):
         self.checkCollision()
         self.wander()
+        # self.checkBounds()
         self.collider.update()
         self.currentAnim.play()
+
+    def checkBounds(self):
+        if self.x <= 0:
+            self.x = 0
+        if self.y <= 0:
+            self.y = 0
+        if self.x >= self.core.scene.tilemanager.get_width() - self.w:
+            self.x = self.core.scene.tilemanager.get_width() - self.w
+        if self.y > self.core.scene.tilemanager.get_height() - self.h:
+            self.y = self.y > self.core.scene.tilemanager.get_height() - self.h
 
     def checkCollision(self):
         if self.core.player.collider.colliding(self):

@@ -1,4 +1,4 @@
-import pygame
+import pygame, random
 from lib.collider import Collider
 
 class Plant:
@@ -29,6 +29,8 @@ class Plant:
         if self.stage >= len(self.images) - 1:
             self.float()
             if self.core.player.collider.colliding(self):
+                self.core.player.inventory["crops"][self.type] += 1
+                self.core.player.inventory["seeds"][self.type] += random.randint(0, 2)
                 self.tile.object = None
         self.collider.update()
         pygame.display.get_surface().blit(self.images[self.stage], (self.x, self.y))

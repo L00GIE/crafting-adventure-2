@@ -13,12 +13,13 @@ class Tile:
         self.y = 0
         self.w = self.image.get_width()
         self.h = self.image.get_height()
+        self.collider = Collider(self, debug=False)
         self.breatheval = 0.1
         self.breatheminval = 0.1
         self.breathemaxval = 1.0
         self.offset = 20
         self.growing = True
-        self.collider = Collider(self, debug=False)
+        self.isdirt = False
         self.showborder = False
         self.selected = False
         self.object = None
@@ -28,13 +29,16 @@ class Tile:
         pygame.display.get_surface().blit(self.image, (self.x, self.y))
         if self.object is not None:
             self.object.loop()
-        if self.imageindex == 98:
-            if self.showborder or self.selected:
-                if not self.selected:
-                    pygame.display.get_surface().blit(self.borderimage, (self.x + self.offset, self.y + self.offset))
-                    self.borderbreathe()
-                else:
-                    pygame.display.get_surface().blit(self.ogborderimage, (self.x, self.y))
+        if self.isdirt:
+            self.showDirtBorder()
+
+    def showDirtBorder(self):
+        if self.showborder or self.selected:
+            if not self.selected:
+                pygame.display.get_surface().blit(self.borderimage, (self.x + self.offset, self.y + self.offset))
+                self.borderbreathe()
+            else:
+                pygame.display.get_surface().blit(self.ogborderimage, (self.x, self.y))
 
     def borderbreathe(self):
         self.borderimage = pygame.transform.smoothscale_by(self.ogborderimage, self.breatheval)
