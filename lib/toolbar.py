@@ -69,14 +69,13 @@ class Toolbar:
         ]
 
     def plantSelected(self):
-        ss = pygame.image.load("data/assets/objects&items/plants.png")
         if self.selecteditem >= len(self.items):
             return
         item = self.items[self.selecteditem]
-        if item.text == "Pumpkin Seeds":
-            for tile in self.core.scene.tilemanager.tiles:
-                if tile.selected:
-                    tile.object = Plant()
+        type = item.text.split()[0].lower()
+        for tile in self.core.scene.tilemanager.tiles:
+            if tile.selected:
+                tile.object = Plant(type, (tile.x, tile.y))
 
 
 class ToolbarItem:
