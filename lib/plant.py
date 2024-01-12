@@ -52,31 +52,41 @@ class Plant:
 
     def initSprites(self):
         ss = pygame.image.load("data/assets/objects&items/plants.png")
+        ss2 = pygame.image.load("data/assets/objects&items/items.png")
         self.images = []
         if self.item.text == "Pumpkin Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 0, 16, 16)))
+            self.images.append(pygame.transform.scale2x(ss2.subsurface(0, 0, 16, 16)))
         if self.item.text == "Strawberry Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 16, 16, 16)))
+            self.images.append(pygame.transform.scale2x(ss2.subsurface(80, 0, 16, 16)))
         if self.item.text == "Carrot Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 32, 16, 16)))
+            self.images.append(pygame.transform.scale2x(ss2.subsurface(32, 0, 16, 16)))
         if self.item.text == "Potato Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 48, 16, 16)))
+            self.images.append(pygame.transform.scale2x(ss2.subsurface(64, 0, 16, 16)))
         if self.item.text == "Cabbage Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 64, 16, 16)))
+            self.images.append(pygame.transform.scale2x(ss2.subsurface(16, 0, 16, 16)))
         if self.item.text == "Wheat Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 80, 16, 16)))
+            self.images.append(pygame.transform.scale2x(ss2.subsurface(48, 0, 16, 16)))
         if self.item.text == "Tomato Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 96, 16, 16)))
+            self.images.append(pygame.transform.scale2x(ss2.subsurface(96, 0, 16, 16)))
         if self.item.text == "Eggplant Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 112, 16, 16)))
+            self.images.append(pygame.transform.scale2x(ss2.subsurface(112, 0, 16, 16)))
         if self.item.text == "Onion Seeds":
             for x in range(4):
                 self.images.append(pygame.transform.scale2x(ss.subsurface(16 + (16 * x), 128, 16, 16)))
+            self.images.append(pygame.transform.scale2x(ss2.subsurface(128, 0, 16, 16)))
