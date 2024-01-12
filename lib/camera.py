@@ -57,9 +57,17 @@ class Camera:
         for tile in self.core.scene.tilemanager.tiles:
             if self.direction == "e":
                 tile.x -= self.shiftspeed
+                if tile.object is not None:
+                    tile.object.x -= self.shiftspeed
             if self.direction == "w":
                 tile.x += self.shiftspeed
+                if tile.object is not None:
+                    tile.object.x += self.shiftspeed
             if self.direction == "n":
                 tile.y -= self.shiftspeed
+                if tile.object is not None:
+                    tile.object.y -= self.shiftspeed
             if self.direction == "s":
                 tile.y += self.shiftspeed
+                if tile.object is not None:
+                    tile.object.y += self.shiftspeed

@@ -74,8 +74,9 @@ class Toolbar:
         item = self.items[self.selecteditem]
         type = item.text.split()[0].lower()
         for tile in self.core.scene.tilemanager.tiles:
-            if tile.selected:
+            if tile.selected and tile.object is None:
                 tile.object = Plant(type, (tile.x, tile.y))
+                tile.selected = False
 
 
 class ToolbarItem:

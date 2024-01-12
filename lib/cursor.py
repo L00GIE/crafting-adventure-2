@@ -27,7 +27,7 @@ class Cursor:
                 tile.showborder = True
                 for event in self.core.events:
                     if event.type == pygame.MOUSEBUTTONDOWN:
-                        if event.button == 1:
+                        if event.button == 1 and tile.imageindex == 98:
                             tile.selected = not tile.selected
             else:
                 tile.showborder = False
