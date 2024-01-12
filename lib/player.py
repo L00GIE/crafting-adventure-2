@@ -31,6 +31,7 @@ class Player:
             self.cowAnim.play()
 
     def checkInput(self):
+        screen = self.core.scene.tilemanager
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LSHIFT]:
             self.speed = self.maxspeed
@@ -38,12 +39,16 @@ class Player:
             self.speed = self.minspeed
         if keys[pygame.K_w]:
             self.move("n", self.walkLeftAnim)
-        if keys[pygame.K_s]:
+            if self.y < 0: self.y = 0
+        elif keys[pygame.K_s]:
             self.move("s", self.walkRightAnim)
-        if keys[pygame.K_a]:
+            if self.y > screen.get_height() - self.h: self.y = screen.get_height() - self.h
+        elif keys[pygame.K_a]:
             self.move("w", self.walkLeftAnim)
-        if keys[pygame.K_d]:
+            if self.x < 0: self.x = 0
+        elif keys[pygame.K_d]:
             self.move("e", self.walkRightAnim)
+            if self.x > screen.get_width() - self.w: self.x = screen.get_width() - self.w
         if not keys[pygame.K_w] and not keys[pygame.K_s] and not \
             keys[pygame.K_a] and not keys[pygame.K_d]:
             if self.direction == "s" or self.direction == "e":

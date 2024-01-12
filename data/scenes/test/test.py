@@ -10,10 +10,10 @@ class Test(Scene):
     def __init__(self, core):
         super().__init__()
         self.core = core
-        self.add(self.core.player)
         self.initChicken()
         self.initObjects()
         self.tilemanager = TileManager("data/scenes/test/export.json", "data/assets/tilemaps/spring farm tilemap.png")
+        self.add(self.core.player)
 
     def loop(self):
         self.tilemanager.loop()

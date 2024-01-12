@@ -44,3 +44,9 @@ class TileManager:
         sub_list = self.remove_elements_at_indices(test_list, rest_of_indices)
         sub_list.pop(first_idx)
         return sub_list
+    
+    def get_width(self):
+        return self.tiles[0].w * 40
+    
+    def get_height(self):
+        return self.tiles[0].h * 20
