@@ -9,6 +9,7 @@ class Toolbar:
         self.w = self.emptyimg.get_width() * 10
         self.selecteditem = 0
         self.initItems()
+        self.font = pygame.font.SysFont("Helvetica", 14)
 
     def loop(self):
         self.checkMouseWheel()
@@ -24,19 +25,19 @@ class Toolbar:
     def checkMouseWheel(self):
         for event in self.core.events:
             if event.type == pygame.MOUSEWHEEL:
-                if event.y > 0:
+                if event.y < 0:
                     self.selecteditem += 1
-                    if self.selecteditem > 9:
+                    if self.selecteditem > 8:
                         self.selecteditem = 0
                 else:
                     self.selecteditem -= 1
                     if self.selecteditem < 0:
-                        self.selecteditem = 9
+                        self.selecteditem = 8
 
     def showTools(self):
         screen = pygame.display.get_surface()
         index = 0
-        for x in range(10):
+        for x in range(9):
             xpos = (self.emptyimg.get_width() * x) + ((screen.get_width() / 2) - (self.w / 2))
             ypos = screen.get_height() - self.emptyimg.get_height()
             screen.blit(self.emptyimg, (xpos, ypos))
@@ -45,6 +46,11 @@ class Toolbar:
             except IndexError:
                 pass
             if index == self.selecteditem:
+                try:
+                    text = self.font.render(self.items[self.selecteditem].text, True, [0, 0, 0])
+                    screen.blit(text, (xpos, ypos - 20))
+                except IndexError:
+                    pass
                 screen.blit(self.border, (xpos, ypos))
             index += 1
 
@@ -75,7 +81,7 @@ class Toolbar:
         type = item.text.split()[0].lower()
         for tile in self.core.scene.tilemanager.tiles:
             if tile.selected and tile.object is None:
-                tile.object = Plant(type, (tile.x, tile.y))
+                tile.object = Plant(self.core, tile, type)
                 tile.selected = False
 
 

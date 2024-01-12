@@ -4,8 +4,9 @@ import pygame, random
 
 class Animal:
 
-    def __init__(self, core, spritesheet):
+    def __init__(self, core, spritesheet, size):
         self.core = core
+        self.size = size
         self.x = 400
         self.y = 400
         self.h = 32
@@ -49,9 +50,9 @@ class Animal:
         ss = pygame.image.load(spritesheet)
         sprites = []
         for x in range(5):
-            sprites.append(ss.subsurface((16 * x, 0, 16, 16)))
+            sprites.append(ss.subsurface((self.size * x, 0, self.size, self.size)))
         self.leftAnim = Animation(sprites, self)
         sprites = []
         for x in range(5):
-            sprites.append(ss.subsurface((16 * x, 16, 16, 16)))
+            sprites.append(ss.subsurface((self.size * x, self.size, self.size, self.size)))
         self.rightAnim = Animation(sprites, self)

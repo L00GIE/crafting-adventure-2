@@ -67,7 +67,11 @@ class Camera:
                 tile.y -= self.shiftspeed
                 if tile.object is not None:
                     tile.object.y -= self.shiftspeed
+                    tile.object.miny -= self.shiftspeed
+                    tile.object.maxy -= self.shiftspeed
             if self.direction == "s":
                 tile.y += self.shiftspeed
                 if tile.object is not None:
                     tile.object.y += self.shiftspeed
+                    tile.object.miny += self.shiftspeed
+                    tile.object.maxy += self.shiftspeed

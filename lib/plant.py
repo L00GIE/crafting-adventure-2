@@ -1,18 +1,24 @@
 import pygame
+from lib.collider import Collider
 
 class Plant:
 
-    def __init__(self, type, pos):
+    def __init__(self, core, tile, type):
+        self.core = core
+        self.tile = tile
         self.type = type
-        self.x = pos[0]
-        self.y = pos[1]
+        self.x = tile.x
+        self.y = tile.y
         self.miny = self.y
         self.maxy = self.y - 20
         self.goingup = True
         self.initSprites()
+        self.w = self.images[0].get_width()
+        self.h = self.images[0].get_height()
         self.stage = 0
         self.timer = 0
         self.maxtimer = 1000
+        self.collider = Collider(self)
 
     def loop(self):
         self.timer += 1
@@ -22,6 +28,9 @@ class Plant:
                 self.stage += 1
         if self.stage >= len(self.images) - 1:
             self.float()
+            if self.core.player.collider.colliding(self):
+                self.tile.object = None
+        self.collider.update()
         pygame.display.get_surface().blit(self.images[self.stage], (self.x, self.y))
 
     def float(self):

@@ -5,14 +5,14 @@ from lib.scene import Scene
 from lib.tilemanager import TileManager
 import pygame
 
-class Test(Scene):
+class Home(Scene):
 
     def __init__(self, core):
         super().__init__()
         self.core = core
         self.initChicken()
         self.initObjects()
-        self.tilemanager = TileManager("data/scenes/test/export.json", "data/assets/tilemaps/spring farm tilemap.png")
+        self.tilemanager = TileManager("data/scenes/home/home.json", "data/assets/tilemaps/spring farm tilemap.png")
         self.add(self.core.player)
 
     def loop(self):
@@ -20,7 +20,9 @@ class Test(Scene):
         super().loop()
 
     def initChicken(self):
-        self.add(Animal(self.core, "data/assets/animals/chicken/brown and white chicken sheet.png"))
+        self.add(Animal(self.core, "data/assets/animals/chicken/brown and white chicken sheet.png", 16))
+        self.add(Animal(self.core, "data/assets/animals/cow/black cow sheet.png", 26))
+        self.add(Animal(self.core, "data/assets/animals/sheep/fluffy white sheep sheet.png", 26))
     
     def initObjects(self):
         ss = pygame.image.load("data/assets/objects&items/spring and summer objects.png")

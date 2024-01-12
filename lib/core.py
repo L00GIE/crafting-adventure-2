@@ -1,5 +1,5 @@
 import pygame
-from data.scenes.test.test import Test
+from data.scenes.home.home import Home
 from lib.camera import Camera
 from lib.cursor import Cursor
 from lib.player import Player
@@ -10,7 +10,7 @@ class Core:
     def __init__(self):
         self.cursor = Cursor(self)
         self.player = Player(self)
-        self.scene = Test(self)
+        self.scene = Home(self)
         self.camera = Camera(self)
         self.ui = UI(self)
 
