@@ -4,6 +4,7 @@
 <ul>
   <li>WSAD to move</li>
   <li>Shift to run</li>
+  <li>F to toggle cow suit</li>
   <li>Tab to open inventory list</li>
   <li>Mouse left button to select plots</li>
   <li>Mouse scroll to change seed type</li>
