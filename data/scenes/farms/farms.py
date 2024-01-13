@@ -5,26 +5,25 @@ from lib.scene import Scene
 from lib.tilemanager import TileManager
 import pygame
 
-class Home(Scene):
+class Farms(Scene):
 
     def __init__(self, core):
         super().__init__()
         self.core = core
         self.initChicken()
         self.initObjects()
-        self.tilemanager = TileManager("data/scenes/home/home.json", "data/assets/tilemaps/spring farm tilemap.png")
-        self.add(self.core.player)
+        self.tilemanager = TileManager("data/scenes/farms/farms.json", "data/assets/tilemaps/spring farm tilemap.png")
 
     def loop(self):
-        if self.core.player.x >= self.tilemanager.get_width():
-            self.core.changeScene(self.core.scenes[1])
+        if self.core.player.x < self.core.player.w * -1:
+            self.core.changeScene(self.core.scenes[0])
         self.checkbounds()
         self.tilemanager.loop()
         super().loop()
 
     def checkbounds(self):
-        if self.core.player.x <= 0:
-            self.core.player.x = 0
+        if self.core.player.y <= 0:
+            self.core.player.y = 0
         if self.core.player.y >= pygame.display.get_surface().get_height() - self.core.player.h:
             self.core.player.y = pygame.display.get_surface().get_height() - self.core.player.h
 

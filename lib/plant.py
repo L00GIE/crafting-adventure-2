@@ -17,7 +17,7 @@ class Plant:
         self.h = self.images[0].get_height()
         self.stage = 0
         self.timer = 0
-        self.maxtimer = 1000
+        self.maxtimer = 100
         self.collider = Collider(self)
 
     def loop(self):

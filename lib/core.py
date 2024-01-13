@@ -1,4 +1,5 @@
 import pygame
+from data.scenes.farms.farms import Farms
 from data.scenes.home.home import Home
 from lib.camera import Camera
 from lib.cursor import Cursor
@@ -24,9 +25,13 @@ class Core:
         self.cursor.loop()
 
     def changeScene(self, scene):
+        self.scene.remove(self.player)
         self.scene = scene
+        self.scene.add(self.player)
+        self.scene.positionplayer()
 
     def initScenes(self):
         self.scenes = [
-            Home(self)
+            Home(self),
+            Farms(self)
         ]
