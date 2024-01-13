@@ -14,9 +14,9 @@ class Player:
         self.lastx = self.x
         self.y = (pygame.display.get_surface().get_height() / 2) - (self.h / 2)
         self.lasty = self.y
-        self.speed = 3
-        self.minspeed = 3
-        self.maxspeed = 6
+        self.speed = 2
+        self.minspeed = 2
+        self.maxspeed = 4
         self.stopped = False
         self.direction = "e"
         self.initSprites()
@@ -87,7 +87,6 @@ class Player:
         if newdir == "s": self.y += self.speed
         if newdir == "w": self.x -= self.speed
         self.shiftobjects()
-        print(self.x, self.y)
 
     def shiftobjects(self):
         deltax = self.lastx - self.x

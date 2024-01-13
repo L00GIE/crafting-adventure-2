@@ -6,7 +6,8 @@ class TileManager:
     def __init__(self, jsonfile, tilemap):
         self.tilepallet = []
         self.tiles = []
-        self.initTiles(tilemap)
+        self.initExteriorTiles(tilemap)
+        self.initInteriorTiles()
         self.loadTiles(jsonfile)
 
     def loop(self):
@@ -30,13 +31,23 @@ class TileManager:
                 x = 0
                 y += 1
 
-    def initTiles(self, tilemap):
+    def initExteriorTiles(self, tilemap):
         ss = pygame.image.load(tilemap)
         for y in range(20):
             for x in range(9):
                 self.tilepallet.append(ss.subsurface((16 * x, 16 * y, 16, 16)))
         blanks = [5,6,7,8,31,40,44,53,58,78,90,91,95,96,97,107,116,125,134,143,152,161,170,179]
         self.tilepallet = self.remove_elements_at_indices(self.tilepallet, blanks)
+
+    def initInteriorTiles(self):
+        ss = pygame.image.load("data/assets/interiors/Tilemaps/walls and floors.png")
+        interiortiles = []
+        for y in range(24):
+            for x in range(10):
+                interiortiles.append(ss.subsurface((16 * x, 16 * y, 16, 16)))
+        blanks = [14, 18, 21, 24, 28, 51, 64, 68, 74, 78, 81, 111, 120, 121, 122, 152]
+        interiortiles = self.remove_elements_at_indices(interiortiles, blanks)
+        self.tilepallet = self.tilepallet + interiortiles
 
     def remove_elements_at_indices(self, test_list, idx_list):
         if not idx_list:

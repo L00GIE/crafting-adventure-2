@@ -4,7 +4,7 @@ sys.dont_write_bytecode = True
 import pygame
 from lib.core import Core
 
-windowed = False
+windowed = True
 
 pygame.init()
 if windowed:
@@ -24,7 +24,7 @@ while running:
         core.loop(events)
         clock.tick(60)
         pygame.display.update()
-        pygame.display.set_caption(f"Farming Adventure | {round(clock.get_fps(), 2)} FPS")
+        pygame.display.set_caption(f"Farming Adventure | {round(clock.get_fps(), 2)} FPS | x: {round(core.player.x)} y: {round(core.player.y)}")
 
 pygame.quit()
 sys.exit(0)

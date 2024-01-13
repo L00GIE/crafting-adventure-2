@@ -34,3 +34,6 @@ class Scene:
         if self.core.player.direction == "w":
             self.core.player.x = pygame.display.get_surface().get_width() - self.core.player.w
             self.core.player.lastx = pygame.display.get_surface().get_width() - self.core.player.w
+        if self.core.player.direction == "s":
+            self.core.player.y = 0
+            self.core.player.lasty = 0

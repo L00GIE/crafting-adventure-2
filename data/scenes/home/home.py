@@ -11,11 +11,14 @@ class Home(Scene):
         super().__init__()
         self.core = core
         self.initChicken()
-        self.initObjects()
+        self.objectsinit = False
         self.tilemanager = TileManager("data/scenes/home/home.json", "data/assets/tilemaps/spring farm tilemap.png")
         self.add(self.core.player)
 
     def loop(self):
+        if not self.objectsinit:
+            self.objectsinit = True
+            self.initObjects()
         if self.core.player.x >= pygame.display.get_surface().get_width():
             self.core.changeScene(self.core.scenes[1])
         self.checkbounds()

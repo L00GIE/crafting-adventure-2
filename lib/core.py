@@ -1,7 +1,7 @@
 import pygame
 from data.scenes.farms.farms import Farms
 from data.scenes.home.home import Home
-from lib.camera import Camera
+from data.scenes.house.house import House
 from lib.cursor import Cursor
 from lib.player import Player
 from lib.ui import UI
@@ -11,6 +11,7 @@ class Core:
     def __init__(self):
         self.cursor = Cursor(self)
         self.player = Player(self)
+        self.scenes = []
         self.initScenes()
         self.scene = self.scenes[0]
         self.ui = UI(self)
@@ -29,7 +30,6 @@ class Core:
         self.scene.positionplayer()
 
     def initScenes(self):
-        self.scenes = [
-            Home(self),
-            Farms(self)
-        ]
+        self.scenes.append(Home(self))
+        self.scenes.append(Farms(self))
+        self.scenes.append(House(self))
