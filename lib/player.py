@@ -109,6 +109,9 @@ class Player:
             leaf.x += deltax
             leaf.y += deltay
             leaf.startx += deltay
+        for cloud in self.core.scene.clouds.clouds:
+            cloud.x += deltax
+            cloud.y += deltay
 
     def updatecowsuit(self):
         if self.direction == "n":

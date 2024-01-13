@@ -4,7 +4,7 @@ sys.dont_write_bytecode = True
 import pygame
 from lib.core import Core
 
-windowed = True
+windowed = False
 
 pygame.init()
 if windowed:

@@ -1,3 +1,4 @@
+from lib.clouds import Clouds
 from lib.leaves import Leaves
 import pygame
 
@@ -6,12 +7,14 @@ class Scene:
     def __init__(self):
         self.objects = []
         self.leaves = Leaves()
+        self.clouds = Clouds()
 
     def loop(self):
         for obj in self.objects:
             if hasattr(obj, "loop"):
                 obj.loop()
         self.leaves.loop()
+        self.clouds.loop()
 
     def add(self, obj, behindplayer=False):
         if behindplayer and self.core.player in self.objects:
