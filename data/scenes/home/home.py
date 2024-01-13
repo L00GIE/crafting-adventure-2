@@ -16,7 +16,7 @@ class Home(Scene):
         self.add(self.core.player)
 
     def loop(self):
-        if self.core.player.x >= self.tilemanager.get_width():
+        if self.core.player.x >= pygame.display.get_surface().get_width():
             self.core.changeScene(self.core.scenes[1])
         self.checkbounds()
         self.tilemanager.loop()

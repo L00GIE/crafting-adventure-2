@@ -11,7 +11,9 @@ class Player:
         self.w = 64
         self.h = 64
         self.x = (pygame.display.get_surface().get_width() / 2) - (self.w / 2)
+        self.lastx = self.x
         self.y = (pygame.display.get_surface().get_height() / 2) - (self.h / 2)
+        self.lasty = self.y
         self.speed = 3
         self.minspeed = 3
         self.maxspeed = 6
@@ -31,6 +33,8 @@ class Player:
         if self.cowsuit:
             self.updatecowsuit()
             self.cowAnim.play()
+        self.lastx = self.x
+        self.lasty = self.y
 
     def checkInput(self):
         keys = pygame.key.get_pressed()
@@ -82,6 +86,29 @@ class Player:
         if newdir == "e": self.x += self.speed
         if newdir == "s": self.y += self.speed
         if newdir == "w": self.x -= self.speed
+        self.shiftobjects()
+        print(self.x, self.y)
+
+    def shiftobjects(self):
+        deltax = self.lastx - self.x
+        deltay = self.lasty - self.y
+        for obj in self.core.scene.objects:
+            if obj == self.core.player: continue
+            obj.x += deltax
+            obj.y += deltay
+        for tile in self.core.scene.tilemanager.tiles:
+            tile.x += deltax
+            tile.y += deltay
+            if tile.object is not None:
+                tile.object.x += deltax
+                tile.object.y += deltay
+                if hasattr(tile.object, "miny") and hasattr(tile.object, "maxy"):
+                    tile.object.miny += deltay
+                    tile.object.maxy += deltay
+        for leaf in self.core.scene.leaves.leaves:
+            leaf.x += deltax
+            leaf.y += deltay
+            leaf.startx += deltay
 
     def updatecowsuit(self):
         if self.direction == "n":

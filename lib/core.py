@@ -13,14 +13,12 @@ class Core:
         self.player = Player(self)
         self.initScenes()
         self.scene = self.scenes[0]
-        self.camera = Camera(self)
         self.ui = UI(self)
 
     def loop(self, events):
         pygame.display.get_surface().fill([165, 197, 67])
         self.events = events
         self.scene.loop()
-        self.camera.loop()
         self.ui.loop()
         self.cursor.loop()
 
