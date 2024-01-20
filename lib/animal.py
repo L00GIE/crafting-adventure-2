@@ -58,7 +58,7 @@ class Animal:
         self.direction = random.choice(["n", "e", "s", "w"])
 
     def initAnim(self, spritesheet):
-        ss = pygame.image.load(spritesheet)
+        ss = pygame.image.load(spritesheet).convert_alpha()
         sprites = []
         for x in range(5):
             sprites.append(ss.subsurface((self.size * x, 0, self.size, self.size)))

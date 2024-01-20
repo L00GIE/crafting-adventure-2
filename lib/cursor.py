@@ -33,5 +33,5 @@ class Cursor:
                 tile.showborder = False
 
     def initSprites(self):
-        ss = pygame.image.load("data/assets/ui/ui elements.png")
+        ss = pygame.image.load("data/assets/ui/ui elements.png").convert_alpha()
         self.default = ss.subsurface((0, 112, 16, 16))

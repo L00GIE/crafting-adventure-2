@@ -7,7 +7,8 @@ class Tile:
         self.manager = manager
         self.imageindex = index
         self.updateImage()
-        self.borderimage = pygame.transform.scale_by(pygame.image.load("data/assets/ui/ui elements.png").subsurface((4, 4, 24, 24)), 2)
+        self.borderimage = pygame.transform.scale_by(
+            pygame.image.load("data/assets/ui/ui elements.png").convert_alpha().subsurface((4, 4, 24, 24)), 2)
         self.ogborderimage = self.borderimage
         self.x = 0
         self.y = 0

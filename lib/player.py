@@ -127,7 +127,7 @@ class Player:
             else: self.cowAnim = self.cowIdleRightAnim
 
     def initSprites(self):
-        ss = pygame.image.load("data/assets/characters/main character/walk and idle.png")
+        ss = pygame.image.load("data/assets/characters/main character/walk and idle.png").convert_alpha()
         self.idleLeftAnim = Animation([ss.subsurface((0, 0, 24, 24)), ss.subsurface((24, 0, 24, 24))], self, delay=20)
         self.idleRightAnim = Animation([ss.subsurface((48, 0, 24, 24)), ss.subsurface((72, 0, 24, 24))], self, delay=20)
         walkleftsprites = []
@@ -138,7 +138,7 @@ class Player:
         for x in range(8):
             walkrightsprites.append(ss.subsurface(24 * x, 48, 24, 24))
         self.walkRightAnim = Animation(walkrightsprites, self)
-        ss = pygame.image.load("data/assets/characters/main character/farming animations.png")
+        ss = pygame.image.load("data/assets/characters/main character/farming animations.png").convert_alpha()
         self.waterLeftAnim = Animation([ss.subsurface(0, 0, 24, 24), ss.subsurface(24, 0, 24, 24)], self)
         self.waterRightAnim = Animation([ss.subsurface(48, 0, 24, 24), ss.subsurface(72, 0, 24, 24)], self)
         self.axeLeftAnim = Animation([ss.subsurface(0, 24, 24, 24), ss.subsurface(24, 24, 24, 24)], self)
@@ -147,7 +147,7 @@ class Player:
         self.hoeRightAnim = Animation([ss.subsurface(48, 48, 24, 24), ss.subsurface(72, 48, 24, 24)], self)
 
     def initCowSuitSprites(self):
-        ss = pygame.image.load("data/assets/characters/main character/cow kigurumi walk and idle.png")
+        ss = pygame.image.load("data/assets/characters/main character/cow kigurumi walk and idle.png").convert_alpha()
         self.cowIdleLeftAnim = Animation([ss.subsurface((0, 0, 24, 24)), ss.subsurface((24, 0, 24, 24))], self, delay=20)
         self.cowIdleRightAnim = Animation([ss.subsurface((48, 0, 24, 24)), ss.subsurface((72, 0, 24, 24))], self, delay=20)
         walkleftsprites = []
@@ -158,7 +158,7 @@ class Player:
         for x in range(8):
             walkrightsprites.append(ss.subsurface(24 * x, 48, 24, 24))
         self.cowWalkRightAnim = Animation(walkrightsprites, self)
-        ss = pygame.image.load("data/assets/characters/main character/cow kigurumi farming animations.png")
+        ss = pygame.image.load("data/assets/characters/main character/cow kigurumi farming animations.png").convert_alpha()
         self.cowWaterLeftAnim = Animation([ss.subsurface(0, 0, 24, 24), ss.subsurface(24, 0, 24, 24)], self)
         self.cowWaterRightAnim = Animation([ss.subsurface(48, 0, 24, 24), ss.subsurface(72, 0, 24, 24)], self)
         self.cowAxeLeftAnim = Animation([ss.subsurface(0, 24, 24, 24), ss.subsurface(24, 24, 24, 24)], self)
@@ -167,7 +167,7 @@ class Player:
         self.cowHoeRightAnim = Animation([ss.subsurface(48, 48, 24, 24), ss.subsurface(72, 48, 24, 24)], self)
 
     def initInventory(self):
-        ss = pygame.image.load("data/assets/objects&items/items.png")
+        ss = pygame.image.load("data/assets/objects&items/items.png").convert_alpha()
         self.inventory = {
             "seeds": [],
             "crops": []

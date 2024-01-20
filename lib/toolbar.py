@@ -65,12 +65,12 @@ class Toolbar:
             index += 1
 
     def initSprites(self):
-        ss = pygame.image.load("data/assets/ui/base.png")
+        ss = pygame.image.load("data/assets/ui/base.png").convert_alpha()
         self.emptyimg = pygame.transform.scale2x(ss.subsurface((0, 144, 48, 48)))
         self.border = pygame.transform.scale2x(ss.subsurface((48, 384, 48, 48)))
 
     def initItems(self):
-        ss = pygame.image.load("data/assets/objects&items/plants.png")
+        ss = pygame.image.load("data/assets/objects&items/plants.png").convert_alpha()
         factor = 3
         self.items = [
             ToolbarItem("Pumpkin Seeds", pygame.transform.scale_by(ss.subsurface(0, 0, 16, 16), factor)),
@@ -94,7 +94,7 @@ class Toolbar:
                     item.count -= 1
 
     def initInventoryWindow(self):
-        ss = pygame.image.load("data/assets/ui/gui.png")
+        ss = pygame.image.load("data/assets/ui/gui.png").convert_alpha()
         size = 128
         self.inventoryWindowParts = []
         self.inventoryWindowParts.append(pygame.transform.scale(ss.subsurface((0, 0, 16, 16)), (size, size))) # top-left corner

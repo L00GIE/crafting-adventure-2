@@ -3,7 +3,7 @@ import pygame, random
 class Leaves:
 
     def __init__(self):
-        ss = pygame.image.load("data/assets/objects&items/items.png")
+        ss = pygame.image.load("data/assets/objects&items/items.png").convert_alpha()
         self.images = [ss.subsurface((64, 32, 16, 16)), ss.subsurface((80, 32, 16, 16))]
         self.leaves = []
 

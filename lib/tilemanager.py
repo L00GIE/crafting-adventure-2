@@ -40,7 +40,7 @@ class TileManager:
         self.tilepallet = self.remove_elements_at_indices(self.tilepallet, blanks)
 
     def initInteriorTiles(self):
-        ss = pygame.image.load("data/assets/interiors/Tilemaps/walls and floors.png")
+        ss = pygame.image.load("data/assets/interiors/Tilemaps/walls and floors.png").convert_alpha()
         interiortiles = []
         for y in range(24):
             for x in range(10):

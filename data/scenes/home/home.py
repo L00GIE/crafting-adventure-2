@@ -37,7 +37,7 @@ class Home(Scene):
         self.add(Animal(self.core, "data/assets/animals/sheep/fluffy white sheep sheet.png", 26))
     
     def initObjects(self):
-        ss = pygame.image.load("data/assets/objects&items/spring and summer objects.png")
+        ss = pygame.image.load("data/assets/objects&items/spring and summer objects.png").convert_alpha()
         self.add(Building(self.core, pygame.transform.scale_by(ss.subsurface((0, 112, 96, 96)), 3), (1000, 200)), behindplayer=True)
         self.add(Clutter(pygame.transform.scale_by(ss.subsurface((144, 0, 32, 48)), 3), (1250, 350)), behindplayer=True)
 

@@ -14,11 +14,12 @@ class Clouds:
 
     def initImages(self):
         self.images = [
-            pygame.image.load("data/assets/objects&items/cloud1.png"),
-            pygame.image.load("data/assets/objects&items/cloud2.png"),
-            pygame.image.load("data/assets/objects&items/cloud3.png"),
-            pygame.image.load("data/assets/objects&items/cloud4.png")
+            pygame.image.load("data/assets/objects&items/cloud1.png").convert_alpha(),
+            pygame.image.load("data/assets/objects&items/cloud2.png").convert_alpha(),
+            pygame.image.load("data/assets/objects&items/cloud3.png").convert_alpha(),
+            pygame.image.load("data/assets/objects&items/cloud4.png").convert_alpha()
         ]
+
 
 class Cloud:
 

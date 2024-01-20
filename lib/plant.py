@@ -51,8 +51,8 @@ class Plant:
                 self.goingup = True
 
     def initSprites(self):
-        ss = pygame.image.load("data/assets/objects&items/plants.png")
-        ss2 = pygame.image.load("data/assets/objects&items/items.png")
+        ss = pygame.image.load("data/assets/objects&items/plants.png").convert_alpha()
+        ss2 = pygame.image.load("data/assets/objects&items/items.png").convert_alpha()
         self.images = []
         if self.item.text == "Pumpkin Seeds":
             for x in range(4):
